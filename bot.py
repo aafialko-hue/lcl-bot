@@ -1036,31 +1036,24 @@ async def main() -> None:
         level=logging.INFO,
         format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
     )
+
     logging.info("RUNNING NEW BOT.PY VERSION")
-   
+
     global APP_DATA
     APP_DATA = load_excel_data(RATES_FILE)
-    logging.info("Loaded %s active pickup cities from %s", len(APP_DATA.cities), RATES_FILE)
 
-  
-bot = Bot(
-    token=BOT_TOKEN,
-    default=DefaultBotProperties(parse_mode=ParseMode.HTML)
-)
-dp = Dispatcher(storage=MemoryStorage())
-register_handlers(dp)
+    bot = Bot(
+        token=BOT_TOKEN,
+        default=DefaultBotProperties(parse_mode=ParseMode.HTML)
+    )
 
-await bot.delete_webhook(drop_pending_updates=True)
-logging.info("Webhook removed, starting polling")
+    dp = Dispatcher(storage=MemoryStorage())
+    register_handlers(dp)
 
     try:
-        await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
-    finally:
-        await bot.session.close()
+        await bot.delete_webhook(drop_pending_updates=True)
+        logging.info("Webhook removed, starting polling")
+        await dp.start_polling(bot)
 
-
-if __name__ == "__main__":
-    try:
-        asyncio.run(main())
-    except (KeyboardInterrupt, SystemExit):
-        logging.info("Bot stopped")
+    except Exception as e:
+        logging.exception(f"Bot crashed: {e}")
