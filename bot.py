@@ -1042,8 +1042,7 @@ async def main() -> None:
     APP_DATA = load_excel_data(RATES_FILE)
     logging.info("Loaded %s active pickup cities from %s", len(APP_DATA.cities), RATES_FILE)
 
-   from aiogram.client.default import DefaultBotProperties
-
+  
 bot = Bot(
     token=BOT_TOKEN,
     default=DefaultBotProperties(parse_mode=ParseMode.HTML)
