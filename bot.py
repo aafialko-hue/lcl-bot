@@ -1,4 +1,4 @@
-import asyncio
+iimport asyncio
 import logging
 import os
 import re
@@ -28,7 +28,6 @@ from aiogram.types import (
     ReplyKeyboardRemove,
 )
 from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardBuilder
-
 
 # =========================
 # CONFIG
