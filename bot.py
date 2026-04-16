@@ -1047,7 +1047,7 @@ bot = Bot(
     token=BOT_TOKEN,
     default=DefaultBotProperties(parse_mode=ParseMode.HTML)
 )
-    dp = Dispatcher(storage=MemoryStorage())
+dp = Dispatcher(storage=MemoryStorage())
     register_handlers(dp)
 
     await bot.delete_webhook(drop_pending_updates=True)
