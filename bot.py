@@ -1048,10 +1048,10 @@ bot = Bot(
     default=DefaultBotProperties(parse_mode=ParseMode.HTML)
 )
 dp = Dispatcher(storage=MemoryStorage())
-    register_handlers(dp)
+register_handlers(dp)
 
-    await bot.delete_webhook(drop_pending_updates=True)
-    logging.info("Webhook removed, starting polling")
+await bot.delete_webhook(drop_pending_updates=True)
+logging.info("Webhook removed, starting polling")
 
     try:
         await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
